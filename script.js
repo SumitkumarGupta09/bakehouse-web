@@ -129,4 +129,63 @@ document.addEventListener('DOMContentLoaded', () => {
         startAutoPlay();
     }
 
+    // --- Category Navigation Menu Functionality ---
+    const navItems = document.querySelectorAll('.category-nav .nav-item');
+    
+    // Add click event listeners to navigation items
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Remove active class from all items
+            navItems.forEach(navItem => navItem.classList.remove('active'));
+            
+            // Add active class to clicked item
+            item.classList.add('active');
+            
+            // Smooth scroll to corresponding section (if exists)
+            const targetId = item.textContent.toLowerCase().replace(/\s+/g, '-');
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Highlight active navigation item based on scroll position
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        
+        // You can add logic here to highlight the appropriate nav item
+        // based on which section is currently in view
+        // This is a placeholder for future enhancement
+    });
+
+    // --- Cake Navigation Footer Functionality ---
+    const cakeNavLinks = document.querySelectorAll('.cake-nav-footer .nav-links a');
+    
+    // Add click event listeners to cake navigation links
+    cakeNavLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Get the link text for potential filtering or navigation
+            const linkText = link.textContent.trim();
+            console.log('Cake category clicked:', linkText);
+            
+            // You can add specific functionality here based on the link clicked
+            // For example: filter products, navigate to category page, etc.
+            
+            // Add a temporary visual feedback
+            link.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                link.style.transform = 'scale(1)';
+            }, 200);
+        });
+    });
+
 });
