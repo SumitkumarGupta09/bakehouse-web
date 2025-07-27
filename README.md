@@ -28,3 +28,9 @@ Welcome to **Bakehouse Web** — a beautifully crafted website for a modern bake
 - **UI Components**: Custom-styled elements, animations  
 - **Responsive Design**: Mobile-first layout using Flexbox/Grid  
 - *(Update with React/Vue/Bootstrap if used)*
+
+| Homepage                      | Category Dropdown                     | Product Gallery                     |
+| ----------------------------- | ------------------------------------- | ----------------------------------- |
+| ![Home](screenshots/home.png) | ![Dropdown](screenshots/dropdown.png) | ![Gallery](screenshots/gallery.png) |
+<img width="1767" height="867" alt="image" src="https://github.com/user-attachments/assets/43d590fb-9f39-4aeb-ade4-8501c0f2384f" />
+
