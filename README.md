@@ -33,7 +33,7 @@ Welcome to **Bakehouse Web** — a beautifully crafted website for a modern bake
 
 <img width="1876" height="855" alt="image" src="https://github.com/user-attachments/assets/19349b81-d1d2-4cc0-b239-bde0c3e4fcec" />
 
-| ----------------------------- | ------------------------------------- | ----------------------------------- |
+
 |Product Gallery |  
 
 <img width="1767" height="867" alt="image" src="https://github.com/user-attachments/assets/43d590fb-9f39-4aeb-ade4-8501c0f2384f" />
