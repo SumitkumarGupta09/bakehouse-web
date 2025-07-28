@@ -130,6 +130,71 @@ section {
     color: #fff;
 }
 
+/* Dropdown Styles */
+.category-nav .dropdown {
+    position: relative;
+}
+
+.category-nav .dropdown .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.category-nav .dropdown .nav-link i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.category-nav .dropdown.active .nav-link i {
+    transform: rotate(180deg);
+}
+
+.category-nav .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 0.8rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+    min-width: 600px;
+    padding: 2rem;
+    display: none;
+    z-index: 1000;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.category-nav .dropdown.active .dropdown-menu {
+    display: grid;
+}
+
+.category-nav .dropdown-column h4 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.category-nav .dropdown-column a {
+    display: block;
+    padding: 0.5rem 0;
+    color: var(--light-text-color);
+    text-decoration: none;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+}
+
+.category-nav .dropdown-column a:hover {
+    color: var(--primary-color);
+    padding-left: 0.5rem;
+}
+
 .category-nav .new-badge {
     background: #ff4757;
     color: #fff;
@@ -837,6 +902,16 @@ section {
     padding: 4rem 2rem;
     border-top: 1px solid var(--border-color);
     margin-top: 3rem;
+    display: none; /* Hidden by default */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.cake-nav-footer.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .cake-nav-footer .nav-footer-container {
@@ -924,6 +999,14 @@ section {
     .cake-nav-footer .nav-links a {
         font-size: 1.3rem;
     }
+    
+    /* Responsive dropdown styles */
+    .category-nav .dropdown-menu {
+        min-width: 500px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
     section {
         padding: 2rem;
     }
@@ -1008,6 +1091,23 @@ section {
     }
     .cake-nav-footer .nav-links a {
         font-size: 1.2rem;
+    }
+    
+    /* Responsive dropdown styles for mobile */
+    .category-nav .dropdown-menu {
+        min-width: 300px;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+        left: -50px;
+    }
+    
+    .category-nav .dropdown-column h4 {
+        font-size: 1.4rem;
+    }
+    
+    .category-nav .dropdown-column a {
+        font-size: 1.3rem;
     }
     .header .hamburger {
         display: block;
@@ -1124,3 +1224,49 @@ section {
         padding: 0.5rem 0.8rem;
     }
 }
+
+
+
+/* Dropdown menu by default hidden */
+.category-nav .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 0.8rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+    min-width: 600px;
+    padding: 2rem;
+    z-index: 1000;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* Show on .active (for mobile) */
+.category-nav .dropdown.active .dropdown-menu {
+    display: grid;
+}
+
+/* Desktop: Hover par bhi show ho (for desktop only) */
+@media (hover: hover) and (pointer: fine) {
+    .category-nav .dropdown:hover > .dropdown-menu,
+    .category-nav .dropdown:focus-within > .dropdown-menu {
+        display: grid !important;
+    }
+}
+
+/* For mobile, .active class se show hoga (already handled by JS) */
+@media (max-width: 991px) {
+    .category-nav .dropdown.active > .dropdown-menu,
+    .category-nav .dropdown.active .dropdown-menu {
+        display: block !important;
+    }
+    .category-nav .dropdown:hover .dropdown-menu {
+        display: none;
+    }
+}
+
+
+

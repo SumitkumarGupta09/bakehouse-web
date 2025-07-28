@@ -131,60 +131,90 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Category Navigation Menu Functionality ---
     const navItems = document.querySelectorAll('.category-nav .nav-item');
-    
+    const cakeNavFooter = document.querySelector('.cake-nav-footer');
+    const dropdowns = document.querySelectorAll('.category-nav .dropdown');
+
+    // Helper: Detect mobile
+    function isMobile() {
+        return window.matchMedia('(max-width: 991px)').matches;
+    }
+
+    // Remove all dropdowns' active class
+    function closeAllDropdowns() {
+        dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+    }
+
     // Add click event listeners to navigation items
     navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Remove active class from all items
-            navItems.forEach(navItem => navItem.classList.remove('active'));
-            
-            // Add active class to clicked item
-            item.classList.add('active');
-            
-            // Smooth scroll to corresponding section (if exists)
-            const targetId = item.textContent.toLowerCase().replace(/\s+/g, '-');
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+        // If dropdown
+        if (item.classList.contains('dropdown')) {
+            item.addEventListener('click', function(e) {
+                if (isMobile()) {
+                    // Only prevent default if anchor or its child is clicked
+                    const anchor = item.querySelector('.nav-link');
+                    if (anchor && (e.target === anchor || anchor.contains(e.target))) {
+                        e.preventDefault();
+                    }
+                    const isActive = item.classList.contains('active');
+                    closeAllDropdowns();
+                    if (!isActive) item.classList.add('active');
+                }
+            });
+        } else {
+            // Non-dropdown nav-item: close dropdowns on click
+            item.addEventListener('click', function () {
+                closeAllDropdowns();
+            });
+        }
     });
 
-    // Highlight active navigation item based on scroll position
-    window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        
-        // You can add logic here to highlight the appropriate nav item
-        // based on which section is currently in view
-        // This is a placeholder for future enhancement
+    // Close dropdowns when clicking outside (mobile only)
+    document.addEventListener('click', function (e) {
+        if (isMobile()) {
+            let insideDropdown = false;
+            dropdowns.forEach(dropdown => {
+                if (dropdown.contains(e.target)) insideDropdown = true;
+            });
+            if (!insideDropdown) closeAllDropdowns();
+        }
+    });
+
+    // Dropdown menu links: close dropdown on click (mobile only)
+    const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Visual feedback
+            link.style.transform = 'scale(1.05)';
+            setTimeout(() => { link.style.transform = 'scale(1)'; }, 200);
+            // Close dropdowns (mobile only)
+            if (isMobile()) closeAllDropdowns();
+            // Optionally: alert or filter
+            // alert(`You clicked on: ${link.textContent.trim()}`);
+        });
     });
 
     // --- Cake Navigation Footer Functionality ---
     const cakeNavLinks = document.querySelectorAll('.cake-nav-footer .nav-links a');
-    
+
     // Add click event listeners to cake navigation links
     cakeNavLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            
+
             // Get the link text for potential filtering or navigation
             const linkText = link.textContent.trim();
             console.log('Cake category clicked:', linkText);
-            
-            // You can add specific functionality here based on the link clicked
-            // For example: filter products, navigate to category page, etc.
-            
+
             // Add a temporary visual feedback
             link.style.transform = 'scale(1.05)';
             setTimeout(() => {
                 link.style.transform = 'scale(1)';
             }, 200);
+
+            // You can add specific functionality here based on the link clicked
+            // For example: filter products, navigate to category page, etc.
+            // For now, we'll just show an alert to demonstrate the functionality
+            alert(`You clicked on: ${linkText}`);
         });
     });
 
