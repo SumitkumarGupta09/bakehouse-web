@@ -144,24 +144,24 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
     }
 
-    // Add click event listeners to navigation items
-    navItems.forEach(item => {
-        // If dropdown
-        if (item.classList.contains('dropdown')) {
-            item.addEventListener('click', function(e) {
+    // Attach click event to .nav-link inside each .dropdown for mobile
+    dropdowns.forEach(dropdown => {
+        const navLink = dropdown.querySelector('.nav-link');
+        if (navLink) {
+            navLink.addEventListener('click', function(e) {
                 if (isMobile()) {
-                    // Only prevent default if anchor or its child is clicked
-                    const anchor = item.querySelector('.nav-link');
-                    if (anchor && (e.target === anchor || anchor.contains(e.target))) {
-                        e.preventDefault();
-                    }
-                    const isActive = item.classList.contains('active');
+                    e.preventDefault();
+                    const isActive = dropdown.classList.contains('active');
                     closeAllDropdowns();
-                    if (!isActive) item.classList.add('active');
+                    if (!isActive) dropdown.classList.add('active');
                 }
             });
-        } else {
-            // Non-dropdown nav-item: close dropdowns on click
+        }
+    });
+
+    // For non-dropdown nav-items, close dropdowns on click
+    navItems.forEach(item => {
+        if (!item.classList.contains('dropdown')) {
             item.addEventListener('click', function () {
                 closeAllDropdowns();
             });

@@ -95,7 +95,7 @@ section {
     max-width: 1200px;
     margin: 0 auto;
     gap: 3rem;
-    overflow-x: auto;
+    /* overflow-x: auto; */
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -193,6 +193,18 @@ section {
 .category-nav .dropdown-column a:hover {
     color: var(--primary-color);
     padding-left: 0.5rem;
+}
+
+/* Specific styling for By Relationship dropdown */
+.category-nav .dropdown:has(.dropdown-column h4 i.fas.fa-star) .dropdown-menu {
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 400px;
+}
+
+.category-nav .dropdown-column h4 i.fas.fa-star {
+    color: #ffd700;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
 }
 
 .category-nav .new-badge {
@@ -1249,6 +1261,11 @@ section {
     display: grid;
 }
 
+/* Always show dropdown if .active is present, even on desktop */
+.category-nav .dropdown.active > .dropdown-menu {
+    display: grid !important;
+}
+
 /* Desktop: Hover par bhi show ho (for desktop only) */
 @media (hover: hover) and (pointer: fine) {
     .category-nav .dropdown:hover > .dropdown-menu,
@@ -1265,6 +1282,110 @@ section {
     }
     .category-nav .dropdown:hover .dropdown-menu {
         display: none;
+    }
+}
+
+/* Desserts dropdown: single column, fixed width */
+.category-nav .dropdown-menu.dessert-dropdown {
+    grid-template-columns: 1fr !important;
+    min-width: 200px !important;
+    max-width: 220px;
+    padding: 1.2rem 1.5rem;
+    left: 0;
+    right: auto;
+}
+
+/* Responsive: full width on mobile */
+@media (max-width: 768px) {
+    .category-nav .dropdown-menu.dessert-dropdown {
+        min-width: 150px !important;
+        max-width: 100vw;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+    }
+    .category-nav .dropdown-menu.dessert-dropdown .dropdown-column a {
+        font-size: 1.3rem;
+    }
+}
+
+/* Birthday dropdown: single column, fixed width */
+.category-nav .dropdown-menu.birthday-dropdown {
+    grid-template-columns: 1fr !important;
+    min-width: 200px !important;
+    max-width: 220px;
+    padding: 1.2rem 1.5rem;
+    left: 0;
+    right: auto;
+}
+
+/* Responsive: full width on mobile */
+@media (max-width: 768px) {
+    .category-nav .dropdown-menu.birthday-dropdown {
+        min-width: 150px !important;
+        max-width: 100vw;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+    }
+    .category-nav .dropdown-menu.birthday-dropdown .dropdown-column a {
+        font-size: 1.3rem;
+    }
+}
+
+/* Anniversary dropdown: single column, fixed width */
+.category-nav .dropdown-menu.anniversary-dropdown {
+    grid-template-columns: 1fr !important;
+    min-width: 220px !important;
+    max-width: 260px;
+    padding: 1.2rem 1.5rem;
+    left: 0;
+    right: auto;
+}
+
+/* Responsive: full width on mobile */
+@media (max-width: 768px) {
+    .category-nav .dropdown-menu.anniversary-dropdown {
+        min-width: 150px !important;
+        max-width: 100vw;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+    }
+    .category-nav .dropdown-menu.anniversary-dropdown .dropdown-column a {
+        font-size: 1.3rem;
+    }
+}
+
+/* Occasions dropdown: two columns, fixed width */
+.category-nav .dropdown-menu.occasions-dropdown {
+    grid-template-columns: repeat(2, 1fr) !important;
+    min-width: 420px !important;
+    max-width: 520px;
+    padding: 1.5rem 2rem;
+    left: 0;
+    right: auto;
+}
+
+/* Star icon for headings */
+.category-nav .dropdown-menu.occasions-dropdown h4 i.fas.fa-star {
+    color: #ffd700;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* Responsive: single column on mobile */
+@media (max-width: 768px) {
+    .category-nav .dropdown-menu.occasions-dropdown {
+        grid-template-columns: 1fr !important;
+        min-width: 150px !important;
+        max-width: 100vw;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+    }
+    .category-nav .dropdown-menu.occasions-dropdown .dropdown-column a {
+        font-size: 1.3rem;
     }
 }
 
